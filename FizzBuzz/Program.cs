@@ -1,0 +1,3 @@
+﻿using FizzBuzz;
+
+Buzz.LinqEdition();

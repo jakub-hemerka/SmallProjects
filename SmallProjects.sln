@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FizzBuzz", "FizzBuzz\FizzBuzz.csproj", "{CA88BDA1-A596-4776-9149-01B9730208D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{89CF3453-189D-403E-8786-FC385197D9F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissors", "RockPaperScissors\RockPaperScissors.csproj", "{2CCC402A-8B6A-4B44-AF6B-575BB354BDDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playlist", "Playlist\Playlist.csproj", "{43D6117C-2975-4299-8346-1BECF57EC614}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA88BDA1-A596-4776-9149-01B9730208D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA88BDA1-A596-4776-9149-01B9730208D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA88BDA1-A596-4776-9149-01B9730208D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA88BDA1-A596-4776-9149-01B9730208D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89CF3453-189D-403E-8786-FC385197D9F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89CF3453-189D-403E-8786-FC385197D9F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89CF3453-189D-403E-8786-FC385197D9F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89CF3453-189D-403E-8786-FC385197D9F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CCC402A-8B6A-4B44-AF6B-575BB354BDDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CCC402A-8B6A-4B44-AF6B-575BB354BDDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CCC402A-8B6A-4B44-AF6B-575BB354BDDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CCC402A-8B6A-4B44-AF6B-575BB354BDDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43D6117C-2975-4299-8346-1BECF57EC614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D6117C-2975-4299-8346-1BECF57EC614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D6117C-2975-4299-8346-1BECF57EC614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D6117C-2975-4299-8346-1BECF57EC614}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {112157FB-70AD-4F01-BAD5-D0B849B02F56}
+	EndGlobalSection
+EndGlobal
