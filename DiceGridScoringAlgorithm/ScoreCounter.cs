@@ -2,39 +2,32 @@
 
 internal class ScoreCounter
 {
-    private readonly GridHandler _handler;
-
     public short Score { get; private set; }
 
-    public ScoreCounter(GridHandler handler)
-    {
-        _handler = handler;
-    }
-
-    public void CalculateScore()
+    public void CalculateScore(sbyte[,] grid)
     {
         Score = 0;
 
         // Check corners
-        CheckNumbers(_handler.Grid[0, 0], _handler.Grid[0, 3], _handler.Grid[3, 0], _handler.Grid[3, 3]);
+        CheckNumbers(grid[0, 0], grid[0, 3], grid[3, 0], grid[3, 3]);
 
         // Check top left to bottom right diagonal
-        CheckNumbers(_handler.Grid[0, 0], _handler.Grid[1, 1], _handler.Grid[2, 2], _handler.Grid[3, 3]);
+        CheckNumbers(grid[0, 0], grid[1, 1], grid[2, 2], grid[3, 3]);
 
         // Check top right to bottom left diagonal
-        CheckNumbers(_handler.Grid[0, 3], _handler.Grid[1, 2], _handler.Grid[2, 1], _handler.Grid[3, 0]);
+        CheckNumbers(grid[0, 3], grid[1, 2], grid[2, 1], grid[3, 0]);
 
         // Check rows
-        for (int i = 0; i < _handler.Grid.GetLength(0); i++)
+        for (int i = 0; i < grid.GetLength(0); i++)
         {
             sbyte[] row = new sbyte[4];
             sbyte[] column = new sbyte[4];
 
-            for (int j = 0; j < _handler.Grid.GetLength(1); j++)
+            for (int j = 0; j < grid.GetLength(1); j++)
             {
-                row[j] = _handler.Grid[i, j];
-                column[j] = _handler.Grid[j, i];
-                Score += _handler.Grid[i, j];
+                row[j] = grid[i, j];
+                column[j] = grid[j, i];
+                Score += grid[i, j];
 
             }
 

@@ -1,13 +1,24 @@
 ﻿using DiceGridScoringAlgorithm;
 
 GridHandler handler = new();
+ScoreCounter counter = new();
 
-handler.GenerateGrid();
+while (true)
+{
+    Console.Clear();
+    Console.WriteLine("Currently generated grid:");
+    handler.GenerateGrid();
+    Console.WriteLine(handler.DisplayGrid());
+    Console.WriteLine();
+    counter.CalculateScore(handler.Grid);
+    Console.WriteLine($"Score earned: {counter.Score}");
 
-ScoreCounter counter = new(handler);
+    Console.Write("\nShall I run again (Y/N): ");
+    string input = Console.ReadLine() ?? "N";
 
-Console.WriteLine(handler.DisplayGrid());
-
-counter.CalculateScore();
-
-Console.WriteLine(counter.Score);
+    // Just trying to be evil
+    if (input.Equals("N", StringComparison.InvariantCultureIgnoreCase))
+    {
+        break;
+    }
+}
