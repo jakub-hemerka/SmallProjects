@@ -2,7 +2,7 @@
 
 internal static class FileReader
 {
-    private static readonly string _filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Programování", "ExterniData", "CountryCodes.csv");
+    private static readonly string _filepath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "CountryCodes.csv");
 
     public static List<CountryModel> GetCountries()
     {

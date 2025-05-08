@@ -11,7 +11,7 @@ public class PlaylistModel
     public PlaylistModel(string title, string filename)
     {
         Title = title;
-        _filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Programování", "ExterniData", filename);
+        _filepath = Path.Combine(Directory.GetCurrentDirectory(), "Data", filename);
         _tracks = new();
     }
 
