@@ -26,9 +26,9 @@ public static class InputParser
 
         for (int i = 0; i < arr.Length; i++)
         {
-            if (_replacementTable.ContainsKey(arr[i]))
+            if (_replacementTable.TryGetValue(arr[i], out char value))
             {
-                arr[i] = _replacementTable[arr[i]];
+                arr[i] = value;
             }
         }
 

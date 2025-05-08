@@ -1,110 +1,128 @@
 ﻿using System.Text;
 
 namespace Playlist;
+
 public class PlaylistModel
 {
-    public string Title { get; init; }
-    public List<TrackModel> Tracks { get; set; }
-
-    private readonly Random _rand;
     private readonly string _filepath;
+    private List<TrackModel> _tracks;
+    public string Title { get; }
 
     public PlaylistModel(string title, string filename)
     {
-        _rand = new();
         Title = title;
         _filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Programování", "ExterniData", filename);
-        Tracks = new();
+        _tracks = new();
     }
 
     public void Load()
     {
-        string[] lines = File.ReadAllLines(_filepath);
-
-        if (lines.Length < 1)
+        if (!File.Exists(_filepath))
         {
             return;
         }
 
+        string[] lines = File.ReadAllLines(_filepath);
+
         foreach (string line in lines)
         {
-            string[] vals = line.Split(';');
+            string[] vals = line.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            TrackModel? track = ParseTrack(vals);
 
-            if (vals.Length != 3 || !int.TryParse(vals[2], out int duration))
+            if (track != null)
             {
-                continue;
+                _tracks.Add(track);
             }
-
-            Tracks.Add(new TrackModel(vals[0], vals[1], TimeSpan.FromSeconds(duration)));
         }
     }
 
     public void Save()
     {
-        List<string> lines = new();
+        File.WriteAllLines(_filepath, _tracks.Select(x => x.ExportString), Encoding.UTF8);
+    }
 
-        foreach (TrackModel track in Tracks)
+    public void Enqueue(string?[] vals)
+    {
+        TrackModel? track = ParseTrack(vals);
+
+        if (track != null)
         {
-            lines.Add($"{track.Title};{track.Artist};{track.Duration.TotalSeconds}");
+            _tracks.Add(track);
+        }
+    }
+
+    public void Remove(string? trackName)
+    {
+        TrackModel? track = _tracks.First(x => x.Title == trackName);
+
+        if (track != null && _tracks.Contains(track))
+        {
+            _ = _tracks.Remove(track);
+        }
+    }
+
+    public void RemoveAt(int index)
+    {
+        if (index < 0 || index >= _tracks.Count)
+        {
+            return;
         }
 
-        File.WriteAllLines(_filepath, lines, Encoding.UTF8);
+        _tracks.RemoveAt(index);
     }
 
-    public void Enqueue(TrackModel track)
+    public string View()
     {
-        Tracks.Add(track);
-    }
+        StringBuilder sb = new($"{Title}\n");
 
-    public void Remove(TrackModel track)
-    {
-        _ = Tracks.Remove(track);
-    }
-
-    public void View()
-    {
-        Console.WriteLine($"Název playlistu: {Title}");
-        Console.WriteLine("=========================");
-        foreach (TrackModel track in Tracks)
+        for (int i = 0; i < _tracks.Count; i++)
         {
-            Console.WriteLine($"{track.Title} by {track.Artist} ({track.Duration:c})");
+            sb.AppendLine($"{i + 1}) {_tracks[i]}");
         }
+
+        return sb.ToString();
     }
 
     public void Shuffle()
     {
-        _ = Tracks.OrderBy(x => _rand.Next());
+        TrackModel[] arr = _tracks.ToArray();
+        Random.Shared.Shuffle(arr);
+        _tracks = arr.ToList();
     }
 
-    public void GetNumberOfTracks()
+    public string GetNumberOfTracks()
     {
-        Console.WriteLine($"This playlist has {Tracks.Count} tracks");
+        return $"This playlist has {_tracks.Count} tracks";
     }
 
-    public void GetDuration()
+    public string GetDuration()
     {
         TimeSpan total = new();
-        foreach (TrackModel track in Tracks)
+        foreach (TrackModel track in _tracks)
         {
             total += track.Duration;
         }
 
-        Console.WriteLine($"Total duration of this playlist is {total:c}");
+        return $"Total duration of this playlist is {total:c}";
     }
 
     public void Reset()
     {
-        Tracks.Clear();
+        _tracks.Clear();
     }
 
-    public void IsEmpty()
+    public string IsEmpty()
     {
-        if (Tracks.Count == 0)
+        return $"Playlist is {(_tracks.Count == 0 ? "empty" : "not empty")}";
+    }
+
+    private static TrackModel? ParseTrack(string?[] vals)
+    {
+        if (vals.Length != 3 || !int.TryParse(vals[2], out int duration) || vals.Any(x => x == null))
         {
-            Console.WriteLine("Playlist is empty");
-            return;
+            return null;
         }
 
-        Console.WriteLine("Playlist is not empty");
+        return new TrackModel(vals[0] ?? "Error", vals[1] ?? "Error", TimeSpan.FromSeconds(duration));
     }
 }
